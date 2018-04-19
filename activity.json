@@ -4,7 +4,7 @@
   "type": "flogo:activity",
   "description": "activity description",
   "author": "Your Name <you.name@example.org>",
-  "ref" : "https://github.com/SonaliS01/FlogoOracle",
+  "ref" : "https://github.com/SonaliS01/FlogoOracle ,github.com/TIBCOSoftware/flogo-contrib/action/flow",
  "inputs":[
     {
       "name": "dbUrl",
