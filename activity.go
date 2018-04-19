@@ -1,11 +1,13 @@
-package OracleDb
+package Oracle
 
 import (
 	"github.com/TIBCOSoftware/flogo-lib/core/activity"
 	"github.com/TIBCOSoftware/flogo-lib/logger"
+	"database/sql"
+    _ "github.com/mattn/go-oci8"
 )
 
-var log = logger.GetLogger("activity-OracleDb")
+var log = logger.GetLogger("activity-Oracle")
 
 // MyActivity is a stub for your Activity implementation
 type MyActivity struct {
@@ -28,14 +30,23 @@ func (a *MyActivity) Eval(context activity.Context) (done bool, err error)  {
 	// do eval
 	
 	
-	name := context.GetInput("name").(string)
-	salutation := context.GetInput("salutation").(string)
+	dbUrl := context.GetInput("dbUrl").(string)
+	log.Debugf("dbUrl");
 
-	// Use the log object to log the greeting
-	log.Debugf("The Flogo engine says [%s] to [%s]", salutation, name)
-
-	// Set the result as part of the context
-	context.SetOutput("result", "The Flogo engine says "+salutation+" to "+name)
-
+	
+	db, err := sql.Open("oci8",dbUrl)	
+	log.Debugf("Connection Successful");
+    if err != nil {
+         log.Debugf("Connection Refused");
+        return
+    }
+    defer db.Close()
+	
+	if err = db.Ping(); err != nil {
+        log.Debugf("Error connecting to the database: %s\n", err);
+        return
+    }
+    
+	context.SetOutput("output","")
 	return true, nil
 }

@@ -1,4 +1,4 @@
-package OracleDb
+package Oracle
 
 import (
 	"io/ioutil"
@@ -49,11 +49,15 @@ func TestEval(t *testing.T) {
 	tc := test.NewTestActivityContext(getActivityMetadata())
 
 	//setup attrs
-	tc.SetInput("name", "Leon")
-	tc.SetInput("salutation", "Hello")
+	tc.SetInput("dbUrl", "SourceTree/SourceTree@127.0.0.1:1521/orcl")
+	
 	act.Eval(tc)
 
 	//check result attr
-	result := tc.GetOutput("result")
-	assert.Equal(t, result, "The Flogo engine says Hello to Leon")
+	output := tc.GetOutput("output")
+		
+	assert.Equal(t,output,"")
+	{
+             log.Debugf("Connection Successfull")
+    }
 }

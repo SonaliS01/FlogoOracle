@@ -1,22 +1,18 @@
 {
-  "name": "OracleDb",
+  "name": "Oracle",
   "version": "0.0.1",
   "type": "flogo:activity",
   "description": "activity description",
   "author": "Your Name <you.name@example.org>",
  "inputs":[
     {
-      "name": "salutation",
-      "type": "string"
-    },
-    {
-      "name": "name",
+      "name": "dbUrl",
       "type": "string"
     }
   ],
   "outputs": [
     {
-      "name": "result",
+      "name": "output",
       "type": "string"
     }
   ]
